@@ -18,18 +18,20 @@ async function fetchPokemonData(pokemonName){
     }
 
     function displayPokemonInfo(pokemon){
-        const{ name, sprites, types, abilities} = pokemon;
+        const{ name, sprites, types, abilities } = pokemon;
 
-        pokemonInfoDiv.innerHTML = `<img src="${sprites.front_default}" alt="${name}"><h3>${name.charAt(0).toUpperCase() + name.slice()}</h3>
-        <p><strong>Tipo:${types.map(type >= type.type.name).join(',')}</strong></p>
-        <p><strong>Habilidades:${abilities.map(ability => ability.ability.name).join(',')}</strong></p>`;
+        pokemonInfoDiv.innerHTML = `
+        <img src="${sprites.front_default}" alt="${name}"><h3>${name.charAt(0).toUpperCase() + name.slice(1)}</h3>
+        <p><strong>Tipo:</strong>${types.map(type => type.type.name).join(', ')}</p>
+        <p><strong>Habilidades:</strong>${abilities.map(ability => ability.ability.name).join(', ')}</p>
+        `;
 
         pokemonInfoDiv.style.display = 'block';
     }
 }
     form.addEventListener('submit', function(event){
         event.preventDefault();
-        const pokemonName = input.ariaValueMax.trim();
+        const pokemonName = input.value.trim();
         if(pokemonName){
             fetchPokemonData(pokemonName);
         }
